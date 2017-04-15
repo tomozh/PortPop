@@ -20,7 +20,7 @@ USBシリアルを使っていて、新しいポートに割り当てられる�
 
 ## Install
 
-[PortPopInstaller.msi](https://github.com/tomozh/PortPop/blob/master/PortPopInstaller/Release/PortPopInstaller.msi) を実行してインストール、または、[PortPop.exe](https://github.com/tomozh/PortPop/blob/master/PortPop/bin/Release/PortPop.exe) を、適当なフォルダに入れて実行して下さい。
+[PortPopInstaller.msi](https://github.com/tomozh/PortPop/raw/master/PortPopInstaller/Release/PortPopInstaller.msi?raw=true) を実行してインストール、または、[PortPop.exe](https://github.com/tomozh/PortPop/blob/master/PortPop/bin/Release/PortPop.exe?raw=true) を、適当なフォルダに入れて実行して下さい。
 
 実行後は、タスクトレイに常駐します。
 
