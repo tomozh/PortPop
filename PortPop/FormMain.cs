@@ -69,7 +69,7 @@ namespace PortPop
             notifyPortAddedToolStripMenuItem.Checked = Properties.Settings.Default.isPopupPortAdded;
             notifyPortRemovedToolStripMenuItem.Checked = Properties.Settings.Default.isPopupPortRemoved;
             notifyDriveAddedToolStripMenuItem.Checked = Properties.Settings.Default.isPopupDriveAdded;
-            notifyDriveAddedToolStripMenuItem.Checked = Properties.Settings.Default.isPopupDriveRemoved;
+            notifyDriveRemovedToolStripMenuItem.Checked = Properties.Settings.Default.isPopupDriveRemoved;
         }
 
         /// <summary>
