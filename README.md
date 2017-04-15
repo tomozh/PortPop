@@ -28,7 +28,7 @@ USBシリアルを使っていて、新しいポートに割り当てられる�
 
 ## Licence
 
-[MIT](https://opensource.org/licenses)
+[MIT](https://opensource.org/licenses/mit-license.php)
 
 ## Author
 
