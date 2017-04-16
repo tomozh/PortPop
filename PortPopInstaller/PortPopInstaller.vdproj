@@ -143,6 +143,17 @@
                 {
                 }
             }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_9730C28B09614ECA86D67D387C39C012"
+            {
+            "Name" = "8:#1928"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:StartupFolder"
+                "Folders"
+                {
+                }
+            }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_ECD4089CE64D4C7EA65E6A99D27B384C"
             {
             "DefaultLocation" = "8:[ProgramFilesFolder]\\[ProductName]"
@@ -171,15 +182,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PortPop"
-        "ProductCode" = "8:{BE90C839-77C5-4151-A12D-33E07E5BB78E}"
-        "PackageCode" = "8:{9296EB0B-B5C4-43E5-BD38-B4DC08859E7E}"
+        "ProductCode" = "8:{60AC278C-E106-4FD7-BBA3-C279055D6F60}"
+        "PackageCode" = "8:{E305D5B6-7E87-4C6E-930E-E776C8B8AD51}"
         "UpgradeCode" = "8:{E334C3A7-9558-461C-AB82-855039E2FFD4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:ore-kb.net"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -292,6 +303,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_335AF86CB30C440EB8E4658C7C139313"
+            {
+            "Name" = "8:PortPop"
+            "Arguments" = "8:"
+            "Description" = "8:シリアルポートやドライブの着脱を通知します"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:32512"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_0EB9196820BB4F2D9F6E73ED0FA149FC"
+            "Folder" = "8:_9730C28B09614ECA86D67D387C39C012"
+            "WorkingFolder" = "8:_ECD4089CE64D4C7EA65E6A99D27B384C"
+            "Icon" = "8:_0EB9196820BB4F2D9F6E73ED0FA149FC"
+            "Feature" = "8:"
+            }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B11566E90F9F4761AA48D987CCE5E45E"
             {
             "Name" = "8:PortPop"
