@@ -16,7 +16,7 @@ USBシリアルを使っていて、新しいポートに割り当てられる�
 ## Requirement
 
 * Microsoft Windows XP 以降
-* Microsoft .net Framework 2.0 以降
+* Microsoft .net Framework 3.5 以降
 
 ## Install
 
