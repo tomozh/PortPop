@@ -107,7 +107,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v2.0"
+                "FrameworkVersion" = "8:.NETFramework,Version=v3.5"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=395269"
                 }
@@ -182,15 +182,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PortPop"
-        "ProductCode" = "8:{60AC278C-E106-4FD7-BBA3-C279055D6F60}"
-        "PackageCode" = "8:{E305D5B6-7E87-4C6E-930E-E776C8B8AD51}"
+        "ProductCode" = "8:{DDA57D63-0514-4C55-B9D7-F8C8F89FC583}"
+        "PackageCode" = "8:{3D76C5E6-90F9-4E77-A3ED-5088713647FC}"
         "UpgradeCode" = "8:{E334C3A7-9558-461C-AB82-855039E2FFD4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.1"
+        "ProductVersion" = "8:1.0.2"
         "Manufacturer" = "8:ore-kb.net"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
