@@ -1,0 +1,9 @@
+C:\Users\tomo\Source\Repos\tomozh\PortPop\PortPop\bin\Release\PortPop.exe.config
+C:\Users\tomo\Source\Repos\tomozh\PortPop\PortPop\bin\Release\PortPop.exe
+C:\Users\tomo\Source\Repos\tomozh\PortPop\PortPop\bin\Release\PortPop.pdb
+C:\Users\tomo\Source\Repos\tomozh\PortPop\PortPop\obj\Release\PortPop.FormMain.resources
+C:\Users\tomo\Source\Repos\tomozh\PortPop\PortPop\obj\Release\PortPop.Properties.Resources.resources
+C:\Users\tomo\Source\Repos\tomozh\PortPop\PortPop\obj\Release\PortPop.csproj.GenerateResource.cache
+C:\Users\tomo\Source\Repos\tomozh\PortPop\PortPop\obj\Release\PortPop.csproj.CoreCompileInputs.cache
+C:\Users\tomo\Source\Repos\tomozh\PortPop\PortPop\obj\Release\PortPop.exe
+C:\Users\tomo\Source\Repos\tomozh\PortPop\PortPop\obj\Release\PortPop.pdb
