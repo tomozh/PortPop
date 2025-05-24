@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.36105.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortPop", "PortPop\PortPop.csproj", "{69C721F8-7F74-4BDD-A2BF-92A9D482761E}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PortPopInstaller", "PortPopInstaller\PortPopInstaller.vdproj", "{9650E74F-BDBD-44D7-A7F0-985F0D808ABB}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PortPopInstaller", "PortPopInstaller\PortPopInstaller.vdproj", "{1FC3AC9F-4C3D-FC02-049A-930BCC7F9C1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,14 @@ Global
 		{69C721F8-7F74-4BDD-A2BF-92A9D482761E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69C721F8-7F74-4BDD-A2BF-92A9D482761E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69C721F8-7F74-4BDD-A2BF-92A9D482761E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9650E74F-BDBD-44D7-A7F0-985F0D808ABB}.Debug|Any CPU.ActiveCfg = Debug
-		{9650E74F-BDBD-44D7-A7F0-985F0D808ABB}.Release|Any CPU.ActiveCfg = Release
+		{1FC3AC9F-4C3D-FC02-049A-930BCC7F9C1C}.Debug|Any CPU.ActiveCfg = Debug
+		{1FC3AC9F-4C3D-FC02-049A-930BCC7F9C1C}.Debug|Any CPU.Build.0 = Debug
+		{1FC3AC9F-4C3D-FC02-049A-930BCC7F9C1C}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {93030307-5E4B-42ED-BB24-9176EE02C430}
 	EndGlobalSection
 EndGlobal
