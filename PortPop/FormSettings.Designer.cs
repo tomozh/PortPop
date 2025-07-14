@@ -118,7 +118,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(523, 94);
             this.label3.TabIndex = 6;
-            this.label3.Text = "引数の中に変数を指定すると、選択したシリアルポートの情報に置き換えられます。\r\n\r\n%D ... ポート番号 (ex. 1,2,3, ...)\r\n%P ... ポ" +
+            this.label3.Text = "引数の中に変数を指定すると、選択したシリアルポートの情報に置き換えられます。\r\n\r\n%N ... ポート番号 (ex. 1,2,3, ...)\r\n%P ... ポ" +
     "ート名 (ex. COM1, COM2, ...)\r\n%F ... フレンドリ名 (ex. Silicon Labs CP210x ...)";
             // 
             // cbLuncherEnable
