@@ -12,7 +12,7 @@ namespace PortPop.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.13.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.12.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -80,6 +80,42 @@ namespace PortPop.Properties {
             }
             set {
                 this["isPopupPortRemoved"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isLuncherEnable {
+            get {
+                return ((bool)(this["isLuncherEnable"]));
+            }
+            set {
+                this["isLuncherEnable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\teraterm\\ttermpro.exe")]
+        public string LuncherExePath {
+            get {
+                return ((string)(this["LuncherExePath"]));
+            }
+            set {
+                this["LuncherExePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/C=%N")]
+        public string LuncherArgument {
+            get {
+                return ((string)(this["LuncherArgument"]));
+            }
+            set {
+                this["LuncherArgument"] = value;
             }
         }
     }

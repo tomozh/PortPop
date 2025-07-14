@@ -5,7 +5,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Management;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PortPop
@@ -58,6 +64,32 @@ namespace PortPop
             public uint dbch_Unitmask;
             public ushort dbch_Flags;
         }
+
+        /// <summary>
+        /// シリアルポートの情報
+        /// </summary>
+        public class SerialPortInfo
+        {
+            /// <summary>
+            /// シリアルポート番号
+            /// </summary>
+            public int PortNumber { get; set; }
+
+            /// <summary>
+            /// シリアルポート名 (ex.COM1, COM2, ...)
+            /// </summary>
+            public string PortName { get; set; }
+
+            /// <summary>
+            /// シリアルポートのフレンドリ名 (ex.Silicon Labs CP10x USB ...)
+            /// </summary>
+            public string FriendlyName { get; set; }
+        }
+
+        /// <summary>
+        /// 接続済みのポート
+        /// </summary>
+        private Dictionary<string, SerialPortInfo> _connectedPort = new Dictionary<string, SerialPortInfo>();
 
         /// <summary>
         /// コンストラクタ
@@ -141,6 +173,82 @@ namespace PortPop
         }
 
         /// <summary>
+        /// 接続されているシリアルポートを列挙
+        /// </summary>
+        /// <returns>接続されているシリアルポート</returns>
+        private List<SerialPortInfo> querySerialPorts()
+        {
+            var ports = new List<SerialPortInfo>();
+
+            string query = $"SELECT * FROM Win32_PnPEntity WHERE PNPClass='Ports'";
+
+            using (var searcher = new ManagementObjectSearcher(query))
+            {
+                foreach (var device in searcher.Get())
+                {
+                    string friendlyName = device["Name"]?.ToString();
+                    var match = Regex.Match(friendlyName, @"\(COM(\d+)\)$");
+
+                    if (match.Success)
+                    {
+                        int portNumber = int.Parse(match.Groups[1].Value);
+
+                        ports.Add(new SerialPortInfo
+                        {
+                            PortNumber = portNumber,
+                            PortName = $"COM{portNumber}",
+                            FriendlyName = friendlyName,
+                        });
+                    }
+                }
+            }
+
+            return ports;
+        }
+
+        /// <summary>
+        /// シリアルポート名からSerialPortInfoを取得
+        /// </summary>
+        /// <param name="portName">シリアルポート名</param>
+        /// <returns>SerialPortInfo</returns>
+        private SerialPortInfo getSerialPortInfo(string portName)
+        {
+            string query = $"SELECT * FROM Win32_PnPEntity WHERE (PNPClass='Ports') AND (Name LIKE '%({portName})%')";
+
+            // 取れなかった場合のリトライ
+            for (int i = 0; i < 3; i++)
+            {
+                using (var searcher = new ManagementObjectSearcher(query))
+                {
+                    foreach (var device in searcher.Get())
+                    {
+                        string friendlyName = device["Name"]?.ToString();
+
+                        if (!string.IsNullOrEmpty(friendlyName))
+                        {
+                            var match = Regex.Match(friendlyName, @"\(COM(\d+)\)$");
+
+                            if (match.Success)
+                            {
+                                return new SerialPortInfo
+                                {
+                                    PortNumber = int.Parse(match.Groups[1].Value),
+                                    PortName = portName,
+                                    FriendlyName = friendlyName,
+                                };
+                            }
+                        }
+                    }
+                }
+
+                Thread.Sleep(100);
+            }
+
+            return null;
+
+        }
+
+        /// <summary>
         /// DBT_DEVTYP_PORT イベント
         /// </summary>
         /// <param name="isArrival">true:追加 / false:削除</param>
@@ -148,25 +256,52 @@ namespace PortPop
         private void onEvent_DBT_DEVTYP_PORT(bool isAdded, Message m)
         {
             var port = (DEV_BROADCAST_PORT)Marshal.PtrToStructure(m.LParam, typeof(DEV_BROADCAST_PORT));
+            string portName = port.dbcp_name;
 
-            if (isAdded)
+            Task.Factory.StartNew(() =>
             {
-                if (Properties.Settings.Default.isPopupPortAdded)
+                lock (_connectedPort)
                 {
-                    notifyIcon.BalloonTipTitle = "シリアルポートが接続されました";
-                    notifyIcon.BalloonTipText = port.dbcp_name;
-                    notifyIcon.ShowBalloonTip(getBalloonTimeout());
+                    notifyIcon.Tag = null;
+
+                    if (isAdded)
+                    {
+                        // 接続時
+                        var info = getSerialPortInfo(portName);
+
+                        if (info != null)
+                        {
+                            _connectedPort.Remove(portName);
+                            _connectedPort.Add(portName, info);
+
+                            if (Properties.Settings.Default.isPopupPortAdded)
+                            {
+                                notifyIcon.Tag = info;  // クリック時のため
+                                notifyIcon.BalloonTipTitle = $"シリアルポートが接続されました";
+                                notifyIcon.BalloonTipText = info.FriendlyName;
+                                notifyIcon.ShowBalloonTip(getBalloonTimeout());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // 切断時
+                        // フレンドリ名が取れないのでキャッシュから取得する
+                        if (_connectedPort.ContainsKey(portName))
+                        {
+                            var info = _connectedPort[portName];
+                            _connectedPort.Remove(portName);
+
+                            if (Properties.Settings.Default.isPopupPortRemoved)
+                            {
+                                notifyIcon.BalloonTipTitle = "シリアルポートが取り外されました";
+                                notifyIcon.BalloonTipText = info.FriendlyName;
+                                notifyIcon.ShowBalloonTip(getBalloonTimeout());
+                            }
+                        }
+                    }
                 }
-            }
-            else
-            {
-                if (Properties.Settings.Default.isPopupPortRemoved)
-                {
-                    notifyIcon.BalloonTipTitle = "シリアルポートが取り外されました";
-                    notifyIcon.BalloonTipText = port.dbcp_name;
-                    notifyIcon.ShowBalloonTip(getBalloonTimeout());
-                }
-            }
+            });
         }
 
         /// <summary>
@@ -191,6 +326,7 @@ namespace PortPop
             }
 
             notifyIcon.BalloonTipText = string.Join(", ", drives.ToArray());
+            notifyIcon.Tag = null;
 
             if (isAdded)
             {
@@ -277,6 +413,108 @@ namespace PortPop
             var item = (ToolStripMenuItem)sender;
             item.Checked = !item.Checked;
             Properties.Settings.Default.isPopupDriveRemoved = item.Checked;
+        }
+
+        /// <summary>
+        /// メニュー：設定
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new FormSettings();
+            dialog.ShowDialog();
+        }
+
+        /// <summary>
+        /// ランチャーアプリを実行
+        /// </summary>
+        /// <param name="info">シリアルポート情報</param>
+        private void lunchProcess(SerialPortInfo info)
+        {
+            if (Properties.Settings.Default.isLuncherEnable)
+            {
+                string exePath = Properties.Settings.Default.LuncherExePath;
+                string arguments = Properties.Settings.Default.LuncherArgument;
+
+                // 変数を置換
+                arguments = arguments
+                    .Replace("%N", info.PortNumber.ToString())
+                    .Replace("%P", info.PortName)
+                    .Replace("%F", info.FriendlyName);
+
+                // プロセス情報の設定
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = exePath,
+                    Arguments = arguments,
+                    UseShellExecute = true,
+                    CreateNoWindow = false,
+                };
+
+                // プロセス開始
+                Process.Start(startInfo);
+            }
+        }
+
+        /// <summary>
+        /// バルーンがクリックされた
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void notifyIcon_BalloonTipClicked(object sender, EventArgs e)
+        {
+            if (sender is NotifyIcon icon)
+            {
+                if (icon.Tag is SerialPortInfo info)
+                {
+                    lunchProcess(info);
+                }
+            }
+        }
+
+        /// <summary>
+        /// タスクトレイアイコン上のMouseUp
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void notifyIcon_MouseUp(object sender, MouseEventArgs e)
+        {
+            // 参考
+            // https://omoisan.hatenablog.com/entry/2017/07/15/203838
+            // このやり方じゃないと左クリックで出したバルーンが消えない
+
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                // 左クリック
+                notifyIcon.ContextMenuStrip = contextMenuStripPortList;
+
+                // 接続中のシリアルポートを取得して番号順にソート
+                var items = querySerialPorts().OrderBy(p => p.PortNumber).ToList();
+
+                contextMenuStripPortList.Items.Clear();
+
+                foreach (var item in items)
+                {
+                    var menu = new ToolStripMenuItem(item.FriendlyName);
+                    menu.Click += (_sender, _e) => lunchProcess(item);
+                    contextMenuStripPortList.Items.Add(menu);
+                }
+            }
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                // 右クリック
+                notifyIcon.ContextMenuStrip = contextMenuStrip;
+            }
+
+            if (notifyIcon.ContextMenuStrip != null)
+            {
+                var method = typeof(NotifyIcon).GetMethod("ShowContextMenu",
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+                method.Invoke(notifyIcon, null);
+                notifyIcon.ContextMenuStrip = null;
+            }
         }
     }
 }

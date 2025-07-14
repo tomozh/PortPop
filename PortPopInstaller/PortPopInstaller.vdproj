@@ -49,6 +49,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.8"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.8 (x86 および x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.8"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -65,6 +81,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.8"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.8 (x86 および x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.8"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -192,18 +224,18 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PortPop"
-        "ProductCode" = "8:{3E38151B-E839-4B66-81DD-EA0077843AC0}"
-        "PackageCode" = "8:{3A27C62E-CF0F-4E3F-B34B-CB8BA9064C29}"
+        "ProductCode" = "8:{DDA57D63-0514-4C55-B9D7-F8C8F89FC583}"
+        "PackageCode" = "8:{CAB862C0-06F8-4B72-8BE4-331A1E698CED}"
         "UpgradeCode" = "8:{E334C3A7-9558-461C-AB82-855039E2FFD4}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.3"
+        "ProductVersion" = "8:1.0.4"
         "Manufacturer" = "8:ore-kb.net"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:https://ore-kb.net"
+        "ARPHELPLINK" = "8:https://github.com/tomozh/PortPop"
         "Title" = "8:PortPopInstaller"
         "Subject" = "8:"
         "ARPCONTACT" = "8:tomozh"
@@ -756,7 +788,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9827A8AEDE874795A25D7495D0E0D99E"
             {
-            "SourcePath" = "8:..\\PortPop\\obj\\Debug\\PortPop.exe"
+            "SourcePath" = "8:..\\PortPop\\obj\\Release\\PortPop.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6F5A912820284766B8674EF137B03091"

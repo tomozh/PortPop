@@ -17,5 +17,14 @@
     <Setting Name="isPopupPortRemoved" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="isLuncherEnable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LuncherExePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\teraterm\ttermpro.exe</Value>
+    </Setting>
+    <Setting Name="LuncherArgument" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/C=%N</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
